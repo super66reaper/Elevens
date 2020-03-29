@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * The Deck class represents a shuffled deck of cards.
@@ -61,8 +62,48 @@ public class Deck {
 	 * Randomly permute the given collection of cards
 	 * and reset the size to represent the entire deck.
 	 */
+
+	 //Struggled on and need help with
 	public void shuffle() {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
+		int valuesLength = values.length;
+
+		int[] selectedIndexs = new int[valuesLength];
+		Card[] shuffled = new int[valuesLength];
+		for(int i = 0; i < valuesLength; i++) {
+			int index = checkRandom(selectedIndexs);
+
+			while(index == -1) {
+				index = checkRandom(selectedIndexs);
+			}
+			System.out.println(index);
+			System.out.println("Success");
+
+			selectedIndexs[i] = index;
+			shuffled[i] = cards.indexOf(index);
+		}
+
+		for(int i = 0; i < cards.length; i++) {
+			cards.indexOf(i) == shuffled[i];
+		}
+	}
+
+	public static int checkRandom(int[] selectedIndexs) {
+		Random rand = new Random();
+
+		int index = rand.nextInt(selectedIndexs.length);
+
+		for(int v : selectedIndexs) {
+			if(index == v) {
+				for(int s : selectedIndexs) {
+					if(s == 0) {
+						return -1;
+					}
+				}
+				return 0;
+			}
+		}
+
+		return index;
 	}
 
 	/**
