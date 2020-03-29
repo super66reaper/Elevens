@@ -1,6 +1,5 @@
-/**
- * This class provides a convenient way to test shuffling methods.
- */
+import java.util.Random;
+
 public class Shuffler {
 
 	/**
@@ -19,7 +18,7 @@ public class Shuffler {
 								 " consecutive perfect shuffles:");
 		int[] values1 = {0, 1, 2, 3};
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
-			perfectShuffle(values1);
+			values1 = perfectShuffle(values1);
 			System.out.print("  " + j + ":");
 			for (int k = 0; k < values1.length; k++) {
 				System.out.print(" " + values1[k]);
@@ -32,7 +31,7 @@ public class Shuffler {
 								 " consecutive efficient selection shuffles:");
 		int[] values2 = {0, 1, 2, 3};
 		for (int j = 1; j <= SHUFFLE_COUNT; j++) {
-			selectionShuffle(values2);
+			values2 = selectionShuffle(values2);
 			System.out.print("  " + j + ":");
 			for (int k = 0; k < values2.length; k++) {
 				System.out.print(" " + values2[k]);
@@ -49,8 +48,26 @@ public class Shuffler {
 	 * the cards in one half with the cards in the other.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static void perfectShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+
+
+	public static int[] perfectShuffle(int[] values) {
+		int amount = values.length + 1;
+		int[] shuffled = new int[amount];
+		int k = 0;
+
+		for(int j = 0; j < (amount) / 2; j++){
+			shuffled[k] = values[j];
+			k = k+2;
+		}
+
+		k = 1;
+
+		for(int j = (amount) / 2; j < values.length; j++){
+			shuffled[k] = values[j];
+			k = k+2;
+		}
+
+		return shuffled;
 	}
 
 	/**
@@ -64,7 +81,42 @@ public class Shuffler {
 	 * searching for an as-yet-unselected card.
 	 * @param values is an array of integers simulating cards to be shuffled.
 	 */
-	public static void selectionShuffle(int[] values) {
-		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+
+	 //Kinda works, had trouble
+	public static int[] selectionShuffle(int[] values) {
+		int valuesLength = values.length;
+
+		int[] selectedIndexs = new int[valuesLength];
+		int[] shuffled = new int[valuesLength];
+		for(int i = 0; i < valuesLength; i++) {
+			int index = checkRandom(selectedIndexs);
+
+			while(index == -1) {
+				index = checkRandom(selectedIndexs);
+			}
+			System.out.println(index);
+			System.out.println("Success");
+
+			selectedIndexs[i] = index;
+			shuffled[i] = values[index];
+		}
+
+		return shuffled;
+	}
+
+	public static int checkRandom(int[] selectedIndexs) {
+		Random rand = new Random();
+
+		int index = rand.nextInt(selectedIndexs.length);
+		for(int v : selectedIndexs) {
+			if(index == v) {
+				if(0 != v) {
+					return 0;
+				}
+				return -1;
+			}
+		}
+
+		return index;
 	}
 }
