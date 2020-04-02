@@ -1,0 +1,3 @@
+1.They all have a a deck of cards and they all have methods like deal cards and checking for win ect.
+2.The board uses the elevensboard object to know thihngs like the board size ranks and suits for the deck and this works with any child objects for board
+3.yes because all of the absract methods in the board class have methods in the elevens board class so it would cover the differences between them.
